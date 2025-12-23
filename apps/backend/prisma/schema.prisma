@@ -1,0 +1,49 @@
+datasource db {
+  provider = "postgresql"
+}
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+// }
+
+model User {
+  id                   String   @id @default(uuid())
+  email                String   @unique
+  passwordHash         String
+  binanceApiKeyEnc     String
+  binanceSecretKeyEnc  String
+  createdAt            DateTime @default(now())
+
+  orderCommands OrderCommand[]
+  orderEvents   OrderEvent[]
+}
+
+model OrderCommand {
+  id        String   @id @default(uuid())
+  orderId   String
+  userId    String
+  symbol    String
+  side      String
+  type      String
+  quantity  Float
+  status    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model OrderEvent {
+  id        String   @id @default(uuid())
+  orderId   String
+  userId    String
+  status    String
+  price     Float?
+  quantity  Float
+  timestamp DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
