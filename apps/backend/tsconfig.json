@@ -7,12 +7,15 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "target": "ES2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
     "types": [],
     "typeRoots": ["./src/types", "./node_modules/@types"],
+
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "outDir": "dist",
+    "rootDir": "src",
+    "esModuleInterop": true,
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
@@ -43,5 +46,6 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true
-  }
+  },
+  "include": ["src"]
 }
