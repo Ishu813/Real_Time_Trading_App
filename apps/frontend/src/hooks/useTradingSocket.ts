@@ -49,9 +49,8 @@ export function useTradingSocket({
 
     socketRef.current?.close();
 
-    const ws = new WebSocket(
-      `ws://localhost:8080/prices?token=${token}&symbol=${symbol}`
-    );
+    const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL}/prices?token=${token}&symbol=${symbol}`;
+    const ws = new WebSocket(wsUrl);
 
     socketRef.current = ws;
 
