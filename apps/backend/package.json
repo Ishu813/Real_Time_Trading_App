@@ -5,6 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "tsc && prisma generate",
+    "start": "node dist/index.js",
+    "migrate": "prisma migrate deploy",
     "dev": "tsx watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
