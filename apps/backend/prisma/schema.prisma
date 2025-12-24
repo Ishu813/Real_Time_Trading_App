@@ -39,11 +39,29 @@ model OrderEvent {
   id        String   @id @default(uuid())
   orderId   String
   userId    String
+  symbol    String
+  side      String
   status    String
   price     Float?
-  quantity  Float
+  quantity  Float?
+  realizedPnl Float?
   timestamp DateTime
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model RealizedPnl {
+  id        String   @id @default(uuid())
+  userId    String
+  symbol    String
+  orderId   String
+  pnl       Float
+  createdAt DateTime @default(now())
+}
+
+model Wallet {
+  userId   String  @id
+  balance  Float
+  updatedAt DateTime @updatedAt
 }

@@ -72,7 +72,7 @@ router.post("/register", async (req: Request, res: Response) => {
         email: user.email,
       },
       JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "1d" }
     );
 
     return res.status(201).json({
@@ -122,7 +122,7 @@ router.post("/login", async (req: Request, res: Response) => {
         email: user.email,
       },
       JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "1d" }
     );
 
     return res.json({
