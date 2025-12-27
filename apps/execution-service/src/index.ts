@@ -1,5 +1,9 @@
 import "dotenv/config";
 import { createClient } from "redis";
+import express from "express";
+
+const app = express();
+app.use(express.json());
 
 const redisUrl = process.env.REDIS_URL;
 if (!redisUrl) {
@@ -53,4 +57,10 @@ await subscriber.subscribe("commands:order:submit", async (message) => {
   };
 
   await redis.publish("events:order:status", JSON.stringify(executionEvent));
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
