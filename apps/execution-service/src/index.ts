@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { createClient } from "redis";
 import express from "express";
+import axios from "axios";
 
 const app = express();
 app.use(express.json());
@@ -24,11 +25,17 @@ const subscriber = redis.duplicate();
 await subscriber.connect();
 
 async function fetchMarkPrice(symbol: string): Promise<number> {
-  const res = await fetch(
-    `https://testnet.binance.vision/api/v3/ticker/price?symbol=${symbol}`
+  const res = await axios.get(
+    "https://testnet.binance.vision/api/v3/ticker/price",
+    { params: { symbol } }
   );
-  const data = await res.json();
-  return Number(data.price);
+  const price = Number(res.data.price);
+
+  if (!price || Number.isNaN(price)) {
+    throw new Error("Invalid price received from Binance");
+  }
+
+  return price;
 }
 
 await subscriber.subscribe("commands:order:submit", async (message) => {
