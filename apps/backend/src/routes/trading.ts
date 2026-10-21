@@ -92,15 +92,6 @@ router.post("/orders", authMiddleware, async (req, res) => {
 });
 
 router.get("/orders", authMiddleware, async (req, res) => {
-  const orders = await prisma.orderEvent.findMany({
-    where: { userId: req.user.id },
-    orderBy: { createdAt: "desc" },
-  });
-
-  res.json(orders);
-});
-
-router.get("/orders", authMiddleware, async (req, res) => {
   try {
     const orders = await prisma.orderEvent.findMany({
       where: { userId: req.user.id },

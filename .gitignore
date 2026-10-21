@@ -2,3 +2,15 @@ node_modules
 .env
 dist
 .next
+.DS_Store
+*.tsbuildinfo
+
+# Backend compiler output belongs in dist/, never alongside TypeScript source.
+apps/backend/src/**/*.js
+apps/backend/src/**/*.js.map
+apps/backend/src/**/*.d.ts
+apps/backend/src/**/*.d.ts.map
+apps/backend/prisma.config.js
+apps/backend/prisma.config.js.map
+apps/backend/prisma.config.d.ts
+apps/backend/prisma.config.d.ts.map
