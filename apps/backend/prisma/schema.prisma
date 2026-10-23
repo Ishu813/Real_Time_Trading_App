@@ -59,9 +59,3 @@ model RealizedPnl {
   pnl       Float
   createdAt DateTime @default(now())
 }
-
-model Wallet {
-  userId   String  @id
-  balance  Float
-  updatedAt DateTime @updatedAt
-}
